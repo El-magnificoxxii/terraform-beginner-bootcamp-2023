@@ -192,3 +192,58 @@ if it is successful, you should see a json payload return that looks like this:
 ```
 
 We will need to generate AWS CLI credentials from IAM user in orther to use the AWS CLI 
+
+## Terraform Basics
+
+
+### Terraform Registry
+Teraform sources their providers and modules from the terraform registry which is located at [registry.terraform.io](https://registry.terraform.io/)
+
+
+- **Providers** is an interface to APIs that will allow you to create resources in terraform.
+- **Modules** are a way to make large amounts of terraform codes modular, portable and sharable 
+
+[Rando Terraform Provider](https://registry.terraform.io/providers/hashicorp/random)
+
+
+#### Terraform Init
+
+At a strat of a new terraform project we will run `terraform init` to download the binaries for the terarform providers that we will use in this project 
+
+
+#### Terraform Plan
+
+This will generate out a changeset, about the state of our infraastructure and what will be changed
+
+We can output the changeset ie. "plan" to be passed to an apply, but often you can just ignore outputing
+
+
+#### Terraform Apply
+
+`terraform apply`
+
+This will run a plan and pass the changeset to be executed by terraform. Apply should prompt YES or NO 
+
+if we want to automatically approve an apply we can provide the auto approve flag e.g `terraform apply --auto-approve`
+
+
+### Terraform Lock Files
+
+`.terraform.lock.hcl` contains the locked versioning for the providers or modules that should be used for this project
+
+The Terraform lockfiles should be commited to your version control system e.g Github
+
+### Terraform State Files
+`.terraform.tfstate` contains information about the current state of your infratstucture. 
+
+This file **should not be commited** to your version control system
+
+This file can contain sensitive data
+
+If you lose this file, you lose knowing the state of your infrastructure.
+
+`.terraform.tfstate.backup` is the previous state file state.
+
+### Teraform Directory
+
+`.terraform` directory contains binaries of terraform providers 
